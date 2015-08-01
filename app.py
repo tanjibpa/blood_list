@@ -1,10 +1,18 @@
-from flask import Flask, render_template, request, g
+from flask import Flask, render_template, request
+from flask.ext.sqlalchemy import SQLAlchemy
 import sqlite3
 
 app = Flask(__name__)
 
-app.secret_key = "something weird"
-app.database = "sample.db"
+# config
+import os
+app.config.from_object(os.environ['APP_SETTINGS'])
+print os.environ['APP_SETTINGS']
+
+# sqlalchemy object
+db = SQLAlchemy(app)
+
+from models import DonorInfo
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -12,21 +20,24 @@ def index():
     if request.method == 'POST':
         blood_group_qrd = request.form.get('blood-group')
         area_qrd = request.form.get('area')
-        g.db = connect_db()
-        cur = g.db.execute(
-            "SELECT * FROM donors WHERE blood_group=? AND area=?", (blood_group_qrd, area_qrd))
-        donors = [dict(first_name=row[1], last_name=row[2], blood_group=row[3],
-                       area=row[4], sex=row[5], birthdate=row[6], last_donated=row[7])
-                  for row in cur.fetchall()]
+        que = db.session.query(DonorInfo).filter_by(
+            blood_group=blood_group_qrd, area=area_qrd).all()
+        donors = [dict(first_name=row.first_name, last_name=row.last_name,
+                       blood_group=row.blood_group, contact=row.contact,
+                       area=row.area, sex=row.sex, birthdate=row.birthdate,
+                       last_donated=row.last_donated, can_donate=row.can_donate)
+                  for row in que]
         print donors
-        g.db.close()
-        return render_template('result.html', donors=donors, blood_group=blood_group_qrd, area=area_qrd)
+        return render_template('result.html',
+                               donors=donors,
+                               blood_group=blood_group_qrd,
+                               area=area_qrd)
     return render_template('landing.html')
 
 
 def connect_db():
-    return sqlite3.connect(app.database)
+    return sqlite3.connect("donors.db")
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0')

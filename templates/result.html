@@ -26,6 +26,7 @@
 			    		<th>Area</th>
 			    		<th>Birthdate</th>
 			    		<th>Last Donated</th>
+			    		<th>Can Donate?</th>
 		    		</tr>
 		    	</thead>
 		    	{% for donor in donors %}
@@ -38,6 +39,11 @@
 		    			<td>{{ donor.area }}</td>
 		    			<td>{{ donor.birthdate }}</td>
 		    			<td>{{ donor.last_donated }}</td>
+		    			{% if donor.can_donate %}
+		    			<td>Yes</td>
+		    			{% else %}
+		    			<td>No</td>
+		    			{% endif %}
 		    		</tr>
 		    	</tbody>
 		    	{% endfor %}
