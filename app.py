@@ -1,13 +1,11 @@
 from flask import Flask, render_template, request
 from flask.ext.sqlalchemy import SQLAlchemy
-import sqlite3
 
 app = Flask(__name__)
 
 # config
 import os
 app.config.from_object(os.environ['APP_SETTINGS'])
-print os.environ['APP_SETTINGS']
 
 # sqlalchemy object
 db = SQLAlchemy(app)
@@ -33,10 +31,6 @@ def index():
                                blood_group=blood_group_qrd,
                                area=area_qrd)
     return render_template('landing.html')
-
-
-def connect_db():
-    return sqlite3.connect("donors.db")
 
 
 if __name__ == '__main__':
