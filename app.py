@@ -10,7 +10,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 # sqlalchemy object
 db = SQLAlchemy(app)
 
-from models import DonorInfo
+from models import *
 
 
 @app.route('/', methods=['GET', 'POST'])
