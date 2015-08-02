@@ -33,5 +33,9 @@ def index():
     return render_template('landing.html')
 
 
+@app.route('/fb', methods=['GET', 'POST'])
+def fb():
+    return render_template('fb.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
