@@ -1,3 +1,4 @@
+from datetime import datetime
 from app import db
 
 from sqlalchemy import ForeignKey
@@ -40,14 +41,25 @@ class Donor(db.Model):
 
     __tablename__ = "donors"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, nullable=False, primary_key=True)
+    created = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    updated = db.Column(db.DateTime, default=datetime.utcnow, nullable=False,
+                        onupdate=datetime.utcnow)
     email = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=False)
+    profile_url = db.Column(db.String, nullable=False)
+    access_token = db.Column(db.String)
     info = relationship("DonorInfo", backref="donor")
 
-    def __init__(self, email, password):
+    def __init__(self, email, password, created, updated, name, profile_url, access_token):
         self.email = email
         self.password = password
+        self.created = created
+        self.updated = updated
+        self.name = name
+        self.profile_url = profile_url
+        self.access_token = access_token
 
     def __repr__(self):
         return '<email {}'.format(self.email)

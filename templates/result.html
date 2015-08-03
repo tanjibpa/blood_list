@@ -1,55 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Welcome to Blood List</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="static/bootstrap.min.css" media="screen">
-	<link rel="stylesheet" type="text/css" href="static/style.css">
-</head>
-<body>
-	<div class="container">
-		<div class="panel panel-default">
-		    <!-- Default panel contents -->
-		    <div class="panel-heading">Search Result</div>
-			    <div class="panel-body">
-			    	<p>These are results for <b>{{ blood_group }}</b> Blood Group donors in <b>{{ area }}</b> area.</p>
-			    </div>
+{% extends "base.html" %}
 
-		    <!-- Table -->
-		    <table class="table">
-		    	<thead>
-		    		<tr>
-			    		<th>First Name</th>
-			    		<th>Last Name</th>
-			    		<th>Sex</th>
-			    		<th>Blood Group</th>
-			    		<th>Area</th>
-			    		<th>Birthdate</th>
-			    		<th>Last Donated</th>
-			    		<th>Can Donate?</th>
-		    		</tr>
-		    	</thead>
-		    	{% for donor in donors %}
-		    	<tbody>
-		    		<tr>
-		    			<td>{{ donor.first_name }}</td>
-		    			<td>{{ donor.last_name }}</td>
-		    			<td>{{ donor.sex }}</td>
-		    			<td>{{ donor.blood_group }}</td>
-		    			<td>{{ donor.area }}</td>
-		    			<td>{{ donor.birthdate }}</td>
-		    			<td>{{ donor.last_donated }}</td>
-		    			{% if donor.can_donate %}
-		    			<td>Yes</td>
-		    			{% else %}
-		    			<td>No</td>
-		    			{% endif %}
-		    		</tr>
-		    	</tbody>
-		    	{% endfor %}
-		    </table>
-		    <button type="button" class="btn btn-default"><a href="/">Go Back</a></button>
-		</div>
+{% block content %}
+
+	<div class="panel panel-default">
+	    <!-- Default panel contents -->
+	    <div class="panel-heading">Search Result</div>
+		    <div class="panel-body">
+		    	<p>These are results for <b>{{ blood_group }}</b> Blood Group donors in <b>{{ area }}</b> area.</p>
+		    </div>
+
+	    <!-- Table -->
+	    <table class="table">
+	    	<thead>
+	    		<tr>
+		    		<th>First Name</th>
+		    		<th>Last Name</th>
+		    		<th>Sex</th>
+		    		<th>Blood Group</th>
+		    		<th>Area</th>
+		    		<th>Birthdate</th>
+		    		<th>Last Donated</th>
+		    		<th>Can Donate?</th>
+	    		</tr>
+	    	</thead>
+	    	{% for donor in donors %}
+	    	<tbody>
+	    		<tr>
+	    			<td>{{ donor.first_name }}</td>
+	    			<td>{{ donor.last_name }}</td>
+	    			<td>{{ donor.sex }}</td>
+	    			<td>{{ donor.blood_group }}</td>
+	    			<td>{{ donor.area }}</td>
+	    			<td>{{ donor.birthdate }}</td>
+	    			<td>{{ donor.last_donated }}</td>
+	    			{% if donor.can_donate %}
+	    			<td>Yes</td>
+	    			{% else %}
+	    			<td>No</td>
+	    			{% endif %}
+	    		</tr>
+	    	</tbody>
+	    	{% endfor %}
+	    </table>
+	    <button type="button" class="btn btn-default"><a href="/">Go Back</a></button>
 	</div>
-</body>
-</html>
+
+{% endblock %}
