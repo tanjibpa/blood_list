@@ -13,31 +13,29 @@
 	    <table class="table">
 	    	<thead>
 	    		<tr>
-		    		<th>First Name</th>
-		    		<th>Last Name</th>
+		    		<th>Name</th>
 		    		<th>Sex</th>
 		    		<th>Blood Group</th>
 		    		<th>Area</th>
 		    		<th>Birthdate</th>
 		    		<th>Last Donated</th>
-		    		<th>Can Donate?</th>
+		    		<!-- <th>Can Donate?</th> -->
 	    		</tr>
 	    	</thead>
 	    	{% for donor in donors %}
 	    	<tbody>
 	    		<tr>
-	    			<td>{{ donor.first_name }}</td>
-	    			<td>{{ donor.last_name }}</td>
+	    			<td>{{ donor.name }}</td>
 	    			<td>{{ donor.sex }}</td>
 	    			<td>{{ donor.blood_group }}</td>
 	    			<td>{{ donor.area }}</td>
 	    			<td>{{ donor.birthdate }}</td>
 	    			<td>{{ donor.last_donated }}</td>
-	    			{% if donor.can_donate %}
+	    			<!-- {% if donor.can_donate %}
 	    			<td>Yes</td>
 	    			{% else %}
 	    			<td>No</td>
-	    			{% endif %}
+	    			{% endif %} -->
 	    		</tr>
 	    	</tbody>
 	    	{% endfor %}

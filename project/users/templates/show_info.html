@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<div class="container">
+		<div class="row">
+			<div class=".col-md-6 .col-md-offset-3">
+				<div class="donor-info">
+					<label>Name:</label>
+					<p>{{ donor_data['name'] }}</p>
+					<label>Blood Group:</label>
+					<p>{{ donor_data['blood_group'] }}</p>
+					<label>Contact:</label>
+					<p>0{{ donor_data['contact'] }}</p>
+					<label>Area:</label>
+					<p>{{ donor_data['area'] }}</p>
+					<label>Sex:</label>
+					<p>{{ donor_data['sex'] }}</p>
+					<label>Birthdate:</label>
+					<p>{{ donor_data['birthdate'] }}</p>
+				</div>
+				<a href="/logout">Logout</a> | <a href="/edit">Edit</a>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

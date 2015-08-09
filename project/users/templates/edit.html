@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+	<div class="register">
+	<a href="/logout" id="logout">Log out</a>
+		<h1>Register</h1>
+		<br>
+		<form class="form-register" role="form" method="post" action="">
+			{{ form.csrf_token }}
+			<label>Name:</label>
+			<p>{{ form.name(placeholder="Name", value=user['name']) }}</p>
+			<label>Blood Group:</label>
+			<p>{{ form.blood_group(value=user['blood_group']) }}</p>
+			<label>Contact:</label>
+			<p>{{ form.contact(value=user['contact']) }}</p>
+			<label>Area:</label>
+			<p>{{ form.area(value=user['area']) }}</p>
+			<label>Sex:</label>
+			<p>{{ form.sex(value=user['sex']) }}</p>
+			<label>Birthdate:</label>
+			<p>{{ form.birthdate(value=user['birthdate']) }}</p>
+			<label>Last Donated:</label>
+			<p>{{ form.last_donated(value=user['last_donated']) }}</p>
+			<button class="btn btn-sm btn-success" type="submit">Update Info</button>
+		</form>
+	</div>
+</div>
+{% endblock %}
